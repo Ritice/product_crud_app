@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { getProducts } from "../App/App";
 
 export function Products(){
 
@@ -13,14 +14,13 @@ export function Products(){
 
     //fonction qui permet de recuperer la liste des produit sur le serveur
     const handleGetProducts=()=>{
-        axios.get("http://localhost:5000/produits")
-          .then(resp=>{
-              const products=resp.data;
-              setProducts(products);
-          })
-          .catch(err=>{
-             console.log(err);
-          })
+        getProducts()
+           .then(resp=>{
+            setProducts(resp.data);
+           })
+           .catch(err=>{
+            console.log(err)
+           })
     }
 
     //fonction quit permet de supprimer un produit
