@@ -1,0 +1,23 @@
+{
+    "produits":[
+            {
+                "id":1,
+                "name":"computer",
+                "price":1500,
+                "checked":false
+            },
+
+            {
+                "id":2,
+                "name":"phone",
+                "price":1500,
+                "checked":false
+            },
+            {
+                "id":3,
+                "name":"computer",
+                "price":1500,
+                "checked":false
+            }
+    ]
+}
