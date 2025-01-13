@@ -7,30 +7,39 @@ export function Products(){
 
     const [products,setProducts]=useState([]);
 
-    useEffect=(()=>{
+    useEffect(()=>{
            handleGetProducts()
     },[])
 
     //fonction qui permet de recuperer la liste des produit sur le serveur
     const handleGetProducts=()=>{
-        axios.get("http://localhost:5000/products")
+        axios.get("http://localhost:5000/produits")
           .then(resp=>{
               const products=resp.data;
               setProducts(products);
           })
           .catch(err=>{
              console.log(err);
-          }
-
-          )
+          })
     }
 
     //fonction quit permet de supprimer un produit
     const handleDeleteProduct=(product)=>{
-        const newProduct=products.filter(p=>p.id!=product.id);
+        const newProduct=products.filter((p)=>p.id!=product.id);
         setProducts(newProduct);   
     }
+    
+    //fonction qui permet de mettre ajour le checked
+    const handleCheckProduct=(product)=>{
+        const newProduct=products.map(p=>{
+            if(p.id==product.id){
+                p.checked=!p.checked;
+            }
+            return p;
+        })
+        setProducts(newProduct); 
 
+    }
     return(
         <div className="p-1 m-1">
           <div className="row"> 
@@ -55,7 +64,7 @@ export function Products(){
                                             <td>{product.name}</td>
                                             <td>{product.price}</td>
                                             <td>
-                                                <button className="btn btn-outline-success">
+                                                <button onClick={()=>handleCheckProduct(product)} className="btn btn-outline-success">
                                                     <FontAwesomeIcon icon={product.checked?faCheckCircle:faCircle}></FontAwesomeIcon>
 
                                                 </button> 
