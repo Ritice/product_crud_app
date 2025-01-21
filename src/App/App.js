@@ -6,25 +6,25 @@ export const productApi = axios.create({
 });
 
 export const getProducts=()=>{
-     return productApi.get("/products");
+     return productApi.get("/produits");
 }
 
 export const deleteProduct=(product)=>{
-     return productApi.delete(`/products/${product.id}`);
+     return productApi.delete(`/produits/${product.id}`);
 }
 
 export const getProduct=(id)=>{
-    return productApi.get(`/products/${id}`);
+    return productApi.get(`/produits/${id}`);
 }
 
 export const saveProduct=(product)=>{
-    return productApi.post(`/products`,product);
+    return productApi.post(`/produits`,product);
 }
 
 export const checkProduct=(product)=>{
-    return productApi.patch(`/products`,{checked:!product.checked})
+    return productApi.patch(`/produits/${product.id}`,{checked:!product.checked})
 }
 
 export const updateProduct=(product)=>{
-    return productApi.put(`/products`,product)
+    return productApi.put(`/produits/${product.id}`,product)
 }

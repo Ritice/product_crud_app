@@ -2,42 +2,49 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { getProducts } from "../App/App";
+import { checkProduct, deleteProduct, getProducts } from "../App/App";
 
 export function Products(){
 
     const [products,setProducts]=useState([]);
 
     useEffect(()=>{
-           handleGetProducts()
+           handleGetProducts();
     },[])
 
     //fonction qui permet de recuperer la liste des produit sur le serveur
     const handleGetProducts=()=>{
         getProducts()
-           .then(resp=>{
-            setProducts(resp.data);
-           })
-           .catch(err=>{
-            console.log(err)
-           })
+                .then((res)=>{
+                 const data =res.data;
+                    setProducts(data);
+                })
+                .catch((err)=>{
+                    console.log(err);
+                })
     }
 
-    //fonction quit permet de supprimer un produit
+    //fonction qui permet de supprimer un produit
     const handleDeleteProduct=(product)=>{
-        const newProduct=products.filter((p)=>p.id!=product.id);
-        setProducts(newProduct);   
+        deleteProduct(product)
+        .then((res)=>{
+             handleGetProducts();
+        })
     }
     
     //fonction qui permet de mettre ajour le checked
     const handleCheckProduct=(product)=>{
-        const newProduct=products.map(p=>{
-            if(p.id==product.id){
-                p.checked=!p.checked;
-            }
-            return p;
-        })
-        setProducts(newProduct); 
+
+        checkProduct(product)
+           .then((rep)=>{
+            const newProduct=products.map(p=>{
+                if(p.id==product.id){
+                    p.checked=!p.checked;
+                }
+                return p;
+            })
+            setProducts(newProduct); 
+           })
 
     }
     return(
