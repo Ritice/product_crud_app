@@ -1,28 +1,76 @@
 {
   "produits": [
     {
-      "id": "2",
-      "name": "tv",
-      "price": 1500,
-      "checked": true
-    },
-    {
-      "id": "3",
-      "name": "tv",
-      "price": 1500,
-      "checked": true
-    },
-    {
       "id": "4",
       "name": "tv",
       "price": 1500,
-      "checked": true
+      "checked": false
     },
     {
       "id": "5",
       "name": "tv",
       "price": 1500,
-      "checked": true
+      "checked": false
+    },
+    {
+      "id": "1bc5",
+      "name": "julien",
+      "price": "55",
+      "checked": ""
+    },
+    {
+      "id": "0e70",
+      "name": "car",
+      "price": "25000",
+      "checked": false
+    },
+    {
+      "id": "f91d",
+      "name": "jus",
+      "price": "500",
+      "checked": ""
+    },
+    {
+      "id": "f91d",
+      "name": "jus",
+      "price": "500",
+      "checked": ""
+    },
+    {
+      "id": "f91d",
+      "name": "jus",
+      "price": "500",
+      "checked": ""
+    },
+    {
+      "id": "1bcv",
+      "name": "julien",
+      "price": "55",
+      "checked": ""
+    },
+    {
+      "id": "0e7x",
+      "name": "car",
+      "price": "25000",
+      "checked": false
+    },
+    {
+      "id": "f91z",
+      "name": "jus",
+      "price": "500",
+      "checked": ""
+    },
+    {
+      "id": "f91n",
+      "name": "jus",
+      "price": "500",
+      "checked": ""
+    },
+    {
+      "id": "f91v",
+      "name": "jus",
+      "price": "500",
+      "checked": ""
     }
   ]
 }

@@ -6,18 +6,29 @@ import { checkProduct, deleteProduct, getProducts } from "../App/App";
 
 export function Products(){
 
-    const [products,setProducts]=useState([]);
+    const [state,setState]=useState({
+        products:[],
+        currentPage:1,
+        pageSize:3,
+        keyword:" ",
+        totalPage:0
+    });
 
     useEffect(()=>{
-           handleGetProducts();
+           handleGetProducts(state.keyword,state.currentPage,state.pageSize);
     },[])
 
     //fonction qui permet de recuperer la liste des produit sur le serveur
-    const handleGetProducts=()=>{
-        getProducts()
+    const handleGetProducts=(keyword,page,size)=>{
+        getProducts(keyword,page,size)
                 .then((res)=>{
                  const data =res.data;
-                    setProducts(data);
+                 setState({
+                    ...state, 
+                    products:res.data, 
+                    keyword:keyword, 
+                    currentPage:page, 
+                    pageSize:size});
                 })
                 .catch((err)=>{
                     console.log(err);
@@ -28,22 +39,22 @@ export function Products(){
     const handleDeleteProduct=(product)=>{
         deleteProduct(product)
         .then((res)=>{
-             handleGetProducts();
+             const newProduct=state.products.filter((p)=>p.id!=product.id);
+             setState({...state, products:newProduct});
         })
     }
     
     //fonction qui permet de mettre ajour le checked
     const handleCheckProduct=(product)=>{
-
         checkProduct(product)
            .then((rep)=>{
-            const newProduct=products.map(p=>{
+            const newProduct=state.products.map(p=>{
                 if(p.id==product.id){
                     p.checked=!p.checked;
                 }
                 return p;
             })
-            setProducts(newProduct); 
+            setState({...state, products:newProduct});
            })
 
     }
@@ -65,7 +76,7 @@ export function Products(){
 
                             <tbody>
                                   {
-                                    products.map(product=>(
+                                    state.products.map(product=>(
                                         <tr key={product.id}>
                                             <td>{product.id}</td>
                                             <td>{product.name}</td>
